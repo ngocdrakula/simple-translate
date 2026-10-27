@@ -1,0 +1,68 @@
+{
+  "name": "cursor-translate-selection",
+  "displayName": "Translate Selection",
+  "description": "Translate selected text using Google Translate",
+  "version": "0.1.0",
+  "publisher": "local",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "keywords": [
+    "translate",
+    "translation",
+    "google translate",
+    "selection",
+    "cursor",
+    "vscode"
+  ],
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onCommand:cursorTranslateSelection.translate"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cursorTranslateSelection.translate",
+        "title": "Translate Selection"
+      }
+    ],
+    "configuration": {
+      "title": "Translate Selection",
+      "properties": {
+        "cursorTranslateSelection.targetLanguage": {
+          "type": "string",
+          "default": "vi",
+          "description": "Target language code (e.g. vi, en, ja, ko)"
+        },
+        "cursorTranslateSelection.sourceLanguage": {
+          "type": "string",
+          "default": "auto",
+          "description": "Source language code or auto for detection"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "cursorTranslateSelection.translate",
+          "when": "editorHasSelection",
+          "group": "navigation@100"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.3"
+  }
+}
